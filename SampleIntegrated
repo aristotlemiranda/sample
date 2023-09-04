@@ -1,0 +1,27 @@
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SampleIntegrated
+{
+    internal class IntegratedService
+    {
+        public static void Main(string[] args) {
+            Console.WriteLine("Testing!!!!");
+
+            SqlConnection conn = new SqlConnection("Data Source=TWTAMM-RAZERADV\\MSSQLSERVER,1433; Initial Catalog=master; Integrated Security=True");
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("msdb.dbo.sp_start_job", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@job_name", "JOB1");
+            
+            cmd.ExecuteNonQuery();
+
+            Console.WriteLine("Done!!!!");
+
+        }
+    }
+}
